@@ -35,7 +35,7 @@ export function OrderTableFilters() {
       values: {
         orderId: orderId ?? '',
         customerName: customerName ?? '',
-        status: status ?? '',
+        status: status ?? 'all',
       },
     },
   )
@@ -113,7 +113,7 @@ export function OrderTableFilters() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Todos</SelectItem>
+                <SelectItem value="all">Todos status</SelectItem>
                 <SelectItem value="pending">Pendente</SelectItem>
                 <SelectItem value="canceled">Cancelado</SelectItem>
                 <SelectItem value="processing">Em preparo</SelectItem>
