@@ -1,30 +1,38 @@
 import { expect, test } from '@playwright/test'
 
-// test('sign in successfull', async ({ page }) => {
-//   await page.goto('/sign-in', { waitUntil: 'networkidle' })
+test('sign up successfully', async ({ page }) => {
+  await page.goto('/sign-up', { waitUntil: 'networkidle' })
 
-//   await page.getByLabel('Seu e-mail').fill('johndoe@example.com')
-//   await page.getByRole('button', { name: 'Acessar painel' }).click()
+  await page.getByLabel('Nome do estabelecimento').fill('Pizza Shop')
+  await page.getByLabel('Seu nome').fill('John Doe')
+  await page.getByLabel('Seu e-mail').fill('johndoe@example.com')
+  await page.getByLabel('Seu celular').fill('81237127123')
 
-//   const toast = page.getByText('Enviamos um link de autenticação para o seu e-mail.')
+  await page.getByRole('button', { name: 'Finalizar cadastro' }).click()
 
-//   expect(toast).toBeVisible()
+  const toast = page.getByText('Restaurante cadastrado com sucesso!')
 
-//   await page.waitForTimeout(2000)
-// })
+  expect(toast).toBeVisible()
 
-// test('sign in with wrong credentials', async ({ page }) => {
-//   await page.goto('/sign-in', { waitUntil: 'networkidle' })
+  await page.waitForTimeout(1500)
+})
 
-//   await page.getByLabel('Seu e-mail').fill('wrong@example.com')
-//   await page.getByRole('button', { name: 'Acessar painel' }).click()
+test('sign up with error', async ({ page }) => {
+  await page.goto('/sign-up', { waitUntil: 'networkidle' })
 
-//   const toast = page.getByText('Credenciais inválidas.')
+  await page.getByLabel('Nome do estabelecimento').fill('Invalid Name')
+  await page.getByLabel('Seu nome').fill('John Doe')
+  await page.getByLabel('Seu e-mail').fill('johndoe@example.com')
+  await page.getByLabel('Seu celular').fill('81237127123')
 
-//   expect(toast).toBeVisible()
+  await page.getByRole('button', { name: 'Finalizar cadastro' }).click()
 
-//   await page.waitForTimeout(2000)
-// })
+  const toast = page.getByText('Erro ao cadastrar restaurante.')
+
+  expect(toast).toBeVisible()
+
+  await page.waitForTimeout(1500)
+})
 
 test('navigate to new login page', async ({ page }) => {
   await page.goto('/sign-up', { waitUntil: 'networkidle' })
